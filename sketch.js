@@ -1,6 +1,4 @@
-let heart, lay, fb, bg;
-var counter = 0;
-var rgb = 0;
+let heart, heartLayer, heartLayerFB, tunnelBG, myFont;
 var r = 255;
 var g = 255;
 var b = 0;
@@ -9,47 +7,77 @@ var colorFSM = 0;
 
 function preload() {
   heart = loadModel('resources/hort3.obj');
+  myFont = loadFont('resources/OpenSans-Regular.ttf');
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  lay = createGraphics(width, height, WEBGL);
-  bg = createGraphics(width, height, WEBGL);
+  heartLayer = createGraphics(width, height, WEBGL);
+  tunnelBG = createGraphics(width, height, WEBGL);
   imageMode(CENTER);
 }
 
 function draw() {
-  // text
+  drawText();
+  drawStars();
+
+  // setup heart and tunnelBG layers
+  tunnelBG.reset();
+  tunnelBG.clear();
+  heartLayer.reset();
+  heartLayer.clear();
+
+  changeHeartBehavior();
+  drawHeart();
+}
+
+
+
+
+
+
+function drawText() {
   var randColor = random(255);
   fill(255);
+  textFont(myFont);
   textSize(width / 50);
   if (frameCount % 3 == 0) text(words, random(-width, width), random(-height, height));
-  counter++;
+}
 
-  // stars
-  //blinking stars
+function drawStars() {
   var galaxy = {
     locationX: random(width),
     locationY: random(height),
     size: random(1, 6)
   }
   ellipse(galaxy.locationX, galaxy.locationY, galaxy.size, galaxy.size);
+}
 
-  // setup heart and bg layer
-  bg.reset();
-  bg.clear();
-  lay.reset();
-  lay.clear();
+function drawHeart() {
+  // draw tunnelBG layer
+  tunnelBG.noFill();
+  tunnelBG.stroke(r, g, b);
+  tunnelBG.background(0, 15);
+  tunnelBG.box(windowHeight);
+  image(tunnelBG, width / 2, height / 2)
 
-  // bg layer
-  bg.noFill();
-  bg.stroke(r, g, b);
-  bg.background(0, 15);
-  bg.box(windowHeight);
-  image(bg, width / 2, height / 2)
+  // draw heartLayer  
+  heartLayer.stroke(r, g, b);
+  console.log(score);
+  heartLayer.fill(0, 0);
+  heartLayer.background(0, 20)
+  translate(width / 2, height / 2)
+  heartLayer.model(heart)
+  image(heartLayer, 0, 0)
 
-  // heart color and bpm
-  lay.rotateY(radians(frameCount));
+  // draw heart glow effect
+  heartLayerFB = get(0, 0, width, height);
+  let heartLayerFBscl = 1.015;
+  image(heartLayerFB, 0, 0, width * heartLayerFBscl, height * heartLayerFBscl)
+}
+
+function changeHeartBehavior() {
+  heartLayer.rotateY(radians(frameCount));  
   if (score == 2) {
     bpm = 80;
     if (colorFSM == 0) { // need to go from 255,255,0 to 255,0,255
@@ -93,21 +121,6 @@ function draw() {
   }
 
   // heart size
-  if (frameCount % bpm == 0) lay.scale(-32);
-  else lay.scale(-26);
-
-  lay.rotateY(radians(frameCount))
-  if (score.score >0.9) rgb = 255;
-  else rgb = 0;
-  lay.stroke(255 - rgb, rgb, 0);
-  lay.fill(0, 0);
-  lay.background(0, 20)
-  translate(width / 2, height / 2)
-  lay.model(heart)
-  image(lay, 0, 0)
-
-  // heart glow effect
-  fb = get(0, 0, width, height);
-  let fbscl = 1.015;
-  image(fb, 0, 0, width * fbscl, height * fbscl)
+  if (frameCount % bpm == 0) heartLayer.scale(-32);
+  else heartLayer.scale(-26);
 }
