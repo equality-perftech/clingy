@@ -1,20 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
+
+
 body {
     text-align: center;
+    background-color: black;
+    color: white;
+    font-family: 'Gochi Hand';
 }
 
-h1 {
-    margin-bottom: 5%;
+h4 {
+    margin-top: 1%;
 }
 
-.text-box {
-    width: 60%;
-    margin: 1% auto;
+p {
+    font-size: 1.25rem;
+    margin: 0;
+    padding: 0;
+}
+
+
+#speech-text-input {
+    width: 50%;
+    margin: 0% auto;
     max-height: 70vh;
-    border-bottom: 1px dotted black;
-}
-
-.text-box:focus {
-    outline: none;
+    line-height: 20px;
+    border: none;
+    padding: 1%;
+    border-radius: 10px;
+    background-color:rgb(212, 212, 212);
 }
 
 .listening {
@@ -27,4 +42,36 @@ h1 {
 
 .p5-canvas {
     background-color: black;
+}
+
+.microphone-button {
+    width: 50px;
+    height: 50px;
+    padding: 1%;
+    font-size: 25px;
+    line-height: 1.33;
+    border-radius: 25px;
+    color: blue;
+}
+
+.microphone-button:hover {
+    color: blue;
+}
+
+.microphone-button:focus {
+    color: blue;
+}
+
+
+.inline-display {
+    display: inline-block;
+}
+
+.speech-container {
+    text-align: flex;
+    opacity: transparent;
+}
+
+#sentiment {
+    font-weight: bold;
 }

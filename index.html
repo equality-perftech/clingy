@@ -4,6 +4,12 @@
     <title>Clingy</title>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
 
+    <!-- Responsive for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <link rel="stylesheet" href="style.css">
     <!-- <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet"> -->
     <script src="https://kit.fontawesome.com/83b9cff54f.js" crossorigin="anonymous"></script>
@@ -19,19 +25,19 @@
   </head>
 
   <body>
-    <h1>Clingy</h1>
+    <h4>How are you feeling today?</h4>
 
-    <div class="text-box" contenteditable="true"></div> <!--text box which will contain spoken text -->
-    <!-- <button class="fa fa-microphone"></button>  -->
-    <button id="microphone">Click to speak</button>
-    <div id="listen-tag" class="listening hidden">Listening...</div>
+    <div class="speech-container">
+      <button id="microphone" type="button inline-display" class="fa fa-microphone microphone-button btn btn-light"></button> 
+      <input type="text" id="speech-text-input" disabled placeholder="Click microphone to speak"></input>
+      <p>Sentiment score:
+        <span id="sentiment"></span>
+        <span id="score"></span>
+      </p>
+        
     
-    <audio class="sound" src="./resources/chime.mp3"></audio>
     <script src="index.js"></script>
-
-    <div>
-      <script src="sketch.js"></script>
-    </div>
+    <script src="sketch.js"></script>
 
   </body>
 </html>
